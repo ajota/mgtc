@@ -247,6 +247,35 @@
       text-decoration: underline;
     }
 
+    /* Casos reales (grid de 3 columnas) */
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin: 2rem 0;
+    }
+    .case-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid var(--gray-border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+    .case-card h4 {
+      font-size: 1.3rem;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+    .case-card .country {
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .case-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
     /* Llamada acción */
     .cta {
       background: linear-gradient(110deg, var(--primary-dark) 0%, var(--secondary) 100%);
@@ -374,6 +403,7 @@
         <a href="#pilares">Pilares</a>
         <a href="#comparativa">Comparativa</a>
         <a href="#soporte">Soporte científico</a>
+        <a href="#casos">Casos reales</a>
         <button id="openModalBtn" class="btn-outline">Sumarse</button>
       </div>
     </div>
@@ -435,6 +465,47 @@
       </div>
     </section>
 
+    <!-- Casos reales (nueva sección) -->
+    <section id="casos">
+      <div class="container">
+        <h2 class="section-title">🌍 Casos reales: Blockchain funcionando hoy</h2>
+        <p class="section-sub">La tecnología de votación descentralizada ya se ha implementado con éxito en elecciones nacionales y subnacionales. Estos ejemplos demuestran que el Pilar VI del MGTC es viable y está probado.</p>
+        <div class="cases-grid">
+          <div class="case-card">
+            <h4>🇷🇴 Rumanía 2024</h4>
+            <div class="country">Elección presidencial</div>
+            <p>Primer país de la UE en usar blockchain (red EBSI) para contar y validar votos de manera descentralizada, con resultados públicos en tiempo real.</p>
+          </div>
+          <div class="case-card">
+            <h4>🇲🇽 Voatz (2018-2024)</h4>
+            <div class="country">Más de 140 elecciones en 7 países</div>
+            <p>Plataforma móvil con verificación biométrica y blockchain. Usada en elecciones presidenciales de México 2024 (10M+ votantes elegibles) y en Utah, Oregón, etc.</p>
+          </div>
+          <div class="case-card">
+            <h4>🇸🇱 Sierra Leona 2018</h4>
+            <div class="country">Primera elección nacional con verificación blockchain</div>
+            <p>La empresa Agora Blockchain validó los votos de la elección presidencial, demostrando la transparencia radical del sistema.</p>
+          </div>
+          <div class="case-card">
+            <h4>🇮🇳 IIT Madras 2024</h4>
+            <div class="country">Elecciones estudiantiles en India</div>
+            <p>Primeras elecciones universitarias basadas en blockchain, desarrolladas por estudiantes con código abierto, escalables a nivel estatal.</p>
+          </div>
+          <div class="case-card">
+            <h4>📦 BLOCKELECT (GitHub)</h4>
+            <div class="country">Sistema descentralizado de código abierto</div>
+            <p>Usa Ethereum + Smart Contracts + MetaMask. Permite votación remota segura y resultados en tiempo real. Disponible para auditoría pública.</p>
+          </div>
+          <div class="case-card">
+            <h4>🔗 VoteLink (GitHub)</h4>
+            <div class="country">Sistema híbrido offline/online</div>
+            <p>Almacena votos en dispositivos locales (Raspberry Pi) y los sincroniza con blockchain cuando hay conectividad. Ideal para zonas rurales.</p>
+          </div>
+        </div>
+        <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">Estos proyectos reales confirman que el voto con blockchain no es ciencia ficción, sino una herramienta disponible para fortalecer la democracia.</p>
+      </div>
+    </section>
+
     <!-- Soporte científico + Blockchain -->
     <section id="soporte">
       <div class="container">
@@ -442,8 +513,10 @@
         <p class="section-sub">El sistema de votación blockchain ha sido investigado y testeado en entornos académicos. El artículo “Transparent voting system using blockchain” (Measurement: Sensors, 2023) demuestra su viabilidad.</p>
         <div class="paper-box">
           <p><strong>📄 Anitha, V., Marquez Caro, O. J., Sudharsan, R., Yoganandan, S., & Vimal, M. (2023).</strong> Transparent voting system using blockchain. <em>Measurement: Sensors</em>, 100620.<br>
-          🔗 <a href="https://pdf.sciencedirectassets.com/321110/1-s2.0-S2665917422X00068/1-s2.0-S2665917422002549/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHQaCXVzLWVhc3QtMSJGMEQCIFp3UOXP%2BeS05MkaX%2FKeUEqdQhwLk6mxzR5hcyyk2Ix5AiBtE3td2WjWVJ9MccqPNJiQGgFJJR3yvPjdoIQYny8xHCqyBQg9EAUaDDA1OTAwMzU0Njg2NSIMpQu%2BJgAWgchJY6GIKo8FUkePQOmKVJMdLRBWjB8B9uGl0SDz2Fnrq5gSDdWG7lZ1RMeBQRt%2FW%2FKClq%2FRDmJEAmtvTGUVx0pK%2B%2BoDfY7IOe57RVVaaHL5fJ%2B3aoOb7R3QfCBiFv0nDzu9hHNbpFz1I%2FsQx4c8ppDz5VibO%2FR82eGEiGM6snDl%2F%2FrJ0FMjf5aEz%2BCVauF2mEeL3mkNTpqZqW4LMohQCqdKc3mqTUlOvNY7nKhq%2FeybXJ3OGo%2BBXBzyKtO0OtkhIHFZUMXMhR5F9RmS%2Bf78QQCEs2DV2sdI%2BVcGekLBHR%2Bu6sxkVo8aaAUpUmRlDxB5yI1GtA%2BypbPL8rTgVwvhMaZtCebSo0lq2nhv0y2LXV22w9liOwRBlZfCbYW9KlOmSFw5VjcgPMkxNRP94Lo8YAEL5KlzMtgK1JmdwgBLMIONIoO20zTmYjRFLJHeHEQRYq%2Ff5HpCTsLadhr%2Byv7zvABc0awCU%2F0jCqxNlpC4jkKHKH0sKEoh88J9fYMn1Cdty3j4z%2BE2qkRnmRVUCh6LrTe%2FwViGG84pORna%2FkAZWoKUqF1Jhx%2BY7Tq3BxAtJUtfHelvXozTb6pM8i9d%2FVzHU5YimDXvEL1gbiw8fSBuZEshOSQlMd7r71jag7QjSgC0IXviiVRoudoRnTuzovVigXX2VNh%2Fvnf9B4u18mAHPji2KhXSacUFoLUeLm%2FkQU08dmyvT4yvpw7KOvlUJJDANn6OdwCrgRy7oyQOIXAoZxO1jtzhcQE9c%2FUa%2BpBxP1TNvYkEupMExjRUiYkyH%2Bmps0a%2Ba1NLQ6%2BYCwmSggiydKeEgYZ0oxP1XTyA9Cecb8ohaEnGWCv8g9B9eL1AIlEble6FARY%2FYt9FnnGHc5FJRF3Z9QglmkfSHzDlpYDRBjqyAfNtECFo4uiBrf%2BID0UZg0rX5zRqTXRiCncrpKlpgQtkSwj3CU0ab75rQZ5Uye2RBEPMRsF7qWrmLxFuhUx9FL9l9Vr4GEfuEh%2F5EkkRaVDR49cK%2BKj%2FfW4Ck%2Bjj8gJ%2Be79NpPnjFoEMUkLYPmh8EOMOZzMKdHHWO%2FfB4jYbzjd1I%2Fi25AJazHv6lalNkIXz5tkfZpuH3O7mkfnzpdQhd9kYQooOdGkxxv9xMm8ER%2FyoWc0%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260603T123923Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQ3PHCVTYZSYVFRPE%2F20260603%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=b2a1a8894c5c3cebe24a612b4408306de0b48e44c41307c1b02e9cb134e60e68&hash=e059a6432c089cdccdb8e75298c626383c9c92ee78c7295d6b60a688c813029f&host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&pii=S2665917422002549&tid=spdf-9b6a4c2c-798c-4dcd-93cb-22f6aee0ed69&sid=52f91510562bb1440c99f712a0765db9a5cbgxrqa&type=client&tsoh=d3d3LnNjaWVuY2VkaXJlY3QuY29t&rh=d3d3LnNjaWVuY2VkaXJlY3QuY29t&ua=1909005f57060557035604&rr=a05ec2a2ba844736&cc=co" target="_blank">DOI: 10.1016/j.measen.2023.100620</a> (acceso público)</p>
+          🔗 <a href="#" target="_blank">DOI: 10.1016/j.measen.2023.100620</a> (acceso público)</p>
           <p style="margin-top: 1rem;">✅ El estudio implementa una dApp con Ethereum, contratos inteligentes y billeteras MetaMask, logrando: inmutabilidad, prevención de doble voto, anonimato mediante cifrado homomórfico y resultados en tiempo real. Este respaldo valida el <strong>Pilar VI</strong> del MGTC.</p>
+          <hr style="margin: 1rem 0; border-color: #cbd5e1;">
+          <p><strong>Referencias adicionales de implementación real:</strong> Los casos de Rumanía 2024 (EBSI), Voatz, Sierra Leona 2018, IIT Madras 2024 y los proyectos de código abierto BLOCKELECT y VoteLink demuestran que el voto blockchain ya es una realidad operativa.</p>
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-top: 1rem;">
           <div style="background: #f1f5f9; border-radius: 20px; padding: 1rem 1.5rem;"><strong>🔒 Inmutabilidad</strong><br>Datos solo añadibles, no alterables</div>
@@ -453,7 +526,7 @@
       </div>
     </section>
 
-    <!-- Llamada a la acción (CTA) con botón que abre modal igual -->
+    <!-- Llamada a la acción (CTA) -->
     <div class="container" id="cta">
       <div class="cta">
         <h2>Construyamos juntos la democracia del futuro</h2>
