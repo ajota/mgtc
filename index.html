@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>MGTC | Modelo de Gestión Pública Técnica y Corresponsable</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      background-color: #ffffff;
+      color: #1e293b;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* Colores institucionales */
+    :root {
+      --primary: #0f3b6f;
+      --primary-dark: #0a2c51;
+      --primary-light: #eef2ff;
+      --secondary: #2c6e9e;
+      --accent: #1e7b5e;
+      --gray-bg: #f8fafc;
+      --gray-border: #e2e8f0;
+      --text-dark: #0f172a;
+      --text-muted: #475569;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header / Navegación */
+    .navbar {
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+      background-color: rgba(255,255,255,0.95);
+    }
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--primary);
+      letter-spacing: -0.3px;
+    }
+    .logo span {
+      color: var(--accent);
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .btn-outline {
+      border: 1.5px solid var(--primary);
+      background: transparent;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: var(--primary);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 80%);
+      padding: 4rem 0 5rem;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+    .hero-badge {
+      background: rgba(15,59,111,0.1);
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+    .hero-image {
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23eef2ff" rx="20"/><circle cx="120" cy="130" r="40" fill="%230f3b6f" opacity="0.2"/><circle cx="280" cy="180" r="50" fill="%231e7b5e" opacity="0.2"/><path d="M100 220 L300 220 L270 270 L130 270 Z" fill="%232c6e9e" opacity="0.3"/><rect x="160" y="80" width="80" height="100" fill="%230f3b6f" opacity="0.15" rx="12"/></svg>') no-repeat center;
+      background-size: contain;
+      min-height: 250px;
+    }
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero h1 { font-size: 2.2rem; }
+    }
+
+    /* Secciones generales */
+    section {
+      padding: 4rem 0;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary-dark);
+      text-align: center;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* Tarjetas pilares */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 1.8rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+      border: 1px solid var(--gray-border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+    }
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--primary);
+    }
+    .card p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    /* Matriz comparativa (tabla responsiva) */
+    .comparison {
+      background: var(--gray-bg);
+    }
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 20px;
+      background: white;
+      border: 1px solid var(--gray-border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th {
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      text-align: left;
+    }
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--gray-border);
+      vertical-align: top;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Cita paper */
+    .paper-box {
+      background: var(--primary-light);
+      padding: 1.8rem;
+      border-radius: 24px;
+      margin: 2rem 0;
+    }
+    .paper-box a {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    /* Llamada acción */
+    .cta {
+      background: linear-gradient(110deg, var(--primary-dark) 0%, var(--secondary) 100%);
+      color: white;
+      text-align: center;
+      border-radius: 2rem;
+      margin: 2rem auto;
+      padding: 3rem 2rem;
+    }
+    .cta h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .cta .btn-primary {
+      background: white;
+      color: var(--primary);
+      margin-top: 1rem;
+    }
+    .cta .btn-primary:hover {
+      background: #f0f0f0;
+    }
+
+    footer {
+      background: #0a0f1c;
+      color: #94a3b8;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+    }
+
+    /* Modal del formulario */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 200;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      backdrop-filter: blur(3px);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background-color: white;
+      margin: 2rem;
+      padding: 2rem;
+      border-radius: 32px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 25px 40px rgba(0,0,0,0.2);
+      position: relative;
+    }
+    .modal-content h3 {
+      font-size: 1.8rem;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+    }
+    .modal-content p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #aaa;
+    }
+    .close-modal:hover {
+      color: #000;
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: var(--text-dark);
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 16px;
+      border: 1px solid var(--gray-border);
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(15,59,111,0.2);
+    }
+    .btn-submit {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      width: 100%;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover {
+      background: #166b52;
+    }
+    .mensaje-exito {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-flex">
+      <div class="logo">MGTC<span>·</span></div>
+      <div class="nav-links">
+        <a href="#pilares">Pilares</a>
+        <a href="#comparativa">Comparativa</a>
+        <a href="#soporte">Soporte científico</a>
+        <button id="openModalBtn" class="btn-outline">Sumarse</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-badge">⚡ Reforma democrática del siglo XXI</div>
+        <h1>Modelo de Gestión Pública Técnica y Corresponsable</h1>
+        <p>De la democracia de marketing a la democracia de competencias, idoneidad y auditoría ciudadana con respaldo en blockchain.</p>
+        <button id="heroSupportBtn" class="btn-primary">Apoyar la propuesta →</button>
+      </div>
+      <div class="hero-image"></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Resumen / diagnóstico -->
+    <div class="container">
+      <div style="max-width: 850px; margin: 1rem auto 0; text-align: center;">
+        <p style="font-size: 1.1rem; color: #334155;">El sistema electoral actual es vulnerable a la manipulación algorítmica y el marketing emocional. El MGTC propone una arquitectura institucional que neutraliza el hackeo cognitivo, profesionaliza el acceso y garantiza escrutinio inmutable mediante blockchain.</p>
+      </div>
+    </div>
+
+    <!-- Pilares -->
+    <section id="pilares">
+      <div class="container">
+        <h2 class="section-title">Los seis pilares del cambio</h2>
+        <p class="section-sub">Un modelo integral que transforma la manera de elegir y ser elegido, con corresponsabilidad ciudadana y transparencia radical.</p>
+        <div class="pillars-grid">
+          <div class="card"><div class="card-icon">🎓</div><h3>Pilar I: Profesionalización + Mentoring</h3><p>Acceso por trayectoria empírica o formal, con apoyo de una institución neutral que ayuda a formular planes de gobierno técnicos. Fin al “titulismo” excluyente.</p></div>
+          <div class="card"><div class="card-icon">🗳️</div><h3>Pilar II: Semana de Auditoría focalizada</h3><p>Una semana laboral remunerada (con compensación a vulnerables) para estudiar propuestas. Turnos rotativos, financiado con fondos de campañas políticas.</p></div>
+          <div class="card"><div class="card-icon">📺</div><h3>Pilar III: Fin de la propaganda política</h3><p>Prohibición total de publicidad electoral. Canal institucional blindado con gobernanza anticaptura, solo datos, planes y debates técnicos.</p></div>
+          <div class="card"><div class="card-icon">⚖️</div><h3>Pilar IV: Corresponsabilidad social</h3><p>Electores que votan por un ganador corrupto asumen servicio comunitario (no multa). Auditoría forense patrimonial obligatoria a altos funcionarios.</p></div>
+          <div class="card"><div class="card-icon">📘</div><h3>Pilar V: Voto como deber contractual</h3><p>Instituto de Capacitación Neutral. Educación cívica sin sesgos, con blindaje penal contra adoctrinamiento. El voto es un compromiso con la sociedad.</p></div>
+          <div class="card"><div class="card-icon">🔗</div><h3>Pilar VI: Blockchain incorruptible</h3><p>Voto descentralizado, inmutable, con contratos inteligentes. Resultados en vivo, anonimato criptográfico, imposibilidad de doble voto o manipulación.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Matriz Comparativa -->
+    <section id="comparativa" class="comparison">
+      <div class="container">
+        <h2 class="section-title">Democracia actual vs. MGTC</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>Dimensión</th><th>Democracia de marketing</th><th>Modelo MGTC</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Criterio de acceso</strong></td><td>Popularidad, financiamiento publicitario</td><td>Idoneidad demostrada + mentoring técnico</td></tr>
+              <tr><td><strong>Campaña</strong></td><td>Microsegmentación emocional, polarización</td><td>Prohibida toda publicidad, solo debate técnico en canal institucional</td></tr>
+              <tr><td><strong>Votación</strong></td><td>Acto impulsivo de minutos, manipulación mediática</td><td>Semana de auditoría + voto escalonado con blockchain</td></tr>
+              <tr><td><strong>Integridad escrutinio</strong></td><td>Centralizado, vulnerable a fraude</td><td>Inmutable, público, contratos inteligentes (Anitha et al., 2023)</td></tr>
+              <tr><td><strong>Responsabilidad</strong></td><td>Inexistente para elector, impunidad patrimonial</td><td>Servicio comunitario por voto a corrupto + auditoría forense a gobierno</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Soporte científico + Blockchain -->
+    <section id="soporte">
+      <div class="container">
+        <h2 class="section-title">Base tecnológica validada</h2>
+        <p class="section-sub">El sistema de votación blockchain ha sido investigado y testeado en entornos académicos. El artículo “Transparent voting system using blockchain” (Measurement: Sensors, 2023) demuestra su viabilidad.</p>
+        <div class="paper-box">
+          <p><strong>📄 Anitha, V., Marquez Caro, O. J., Sudharsan, R., Yoganandan, S., & Vimal, M. (2023).</strong> Transparent voting system using blockchain. <em>Measurement: Sensors</em>, 100620.<br>
+          🔗 <a href="#" target="_blank">DOI: 10.1016/j.measen.2023.100620</a> (acceso público)</p>
+          <p style="margin-top: 1rem;">✅ El estudio implementa una dApp con Ethereum, contratos inteligentes y billeteras MetaMask, logrando: inmutabilidad, prevención de doble voto, anonimato mediante cifrado homomórfico y resultados en tiempo real. Este respaldo valida el <strong>Pilar VI</strong> del MGTC.</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-top: 1rem;">
+          <div style="background: #f1f5f9; border-radius: 20px; padding: 1rem 1.5rem;"><strong>🔒 Inmutabilidad</strong><br>Datos solo añadibles, no alterables</div>
+          <div style="background: #f1f5f9; border-radius: 20px; padding: 1rem 1.5rem;"><strong>👤 Anonimato</strong><br>Ring signatures + homomorphic encryption</div>
+          <div style="background: #f1f5f9; border-radius: 20px; padding: 1rem 1.5rem;"><strong>⚡ Resultados en vivo</strong><br>Verificación continua durante la votación</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Llamada a la acción (CTA) con botón que abre modal igual -->
+    <div class="container" id="cta">
+      <div class="cta">
+        <h2>Construyamos juntos la democracia del futuro</h2>
+        <p style="margin-bottom: 1rem; opacity: 0.9;">Firma por una reforma electoral profunda: más competencia, menos ruido, tecnología incorruptible y ciudadanos corresponsables.</p>
+        <button id="ctaSupportBtn" class="btn-primary" style="background: white; color: #0f3b6f;">Apoyar la propuesta →</button>
+        <p style="font-size: 0.8rem; margin-top: 1.5rem;">Únete a organizaciones civiles, académicos y liderazgos comprometidos con la transparencia radical.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Modelo de Gestión Pública Técnica y Corresponsable (MGTC) — Documento de reforma institucional de acceso abierto.</p>
+      <p style="margin-top: 0.5rem;">Basado en investigación interdisciplinaria y referencias a blockchain, teoría epistocrática y democracia deliberativa.</p>
+    </div>
+  </footer>
+
+  <!-- Modal del formulario de apoyo -->
+  <div id="supportModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3>Apoyar la propuesta MGTC</h3>
+      <p>Completa tus datos y envía tu adhesión. Se abrirá tu cliente de correo con los datos prellenados hacia <strong>mgtcpropuesta@gmail.com</strong>.</p>
+      <form id="supportForm">
+        <div class="form-group">
+          <label for="nombre">Nombre completo *</label>
+          <input type="text" id="nombre" required placeholder="Ej. Ana López">
+        </div>
+        <div class="form-group">
+          <label for="email">Correo electrónico *</label>
+          <input type="email" id="email" required placeholder="tu@correo.com">
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Mensaje (opcional)</label>
+          <textarea id="mensaje" rows="3" placeholder="¿Por qué apoyas este modelo?"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Enviar apoyo</button>
+        <div id="formFeedback" class="mensaje-exito"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Obtener elementos del modal
+    const modal = document.getElementById('supportModal');
+    const openModalBtns = document.querySelectorAll('#openModalBtn, #heroSupportBtn, #ctaSupportBtn');
+    const closeModalSpan = document.querySelector('.close-modal');
+    const supportForm = document.getElementById('supportForm');
+    const feedback = document.getElementById('formFeedback');
+
+    // Abrir modal
+    openModalBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.style.display = 'flex';
+      });
+    });
+
+    // Cerrar modal
+    closeModalSpan.onclick = function() {
+      modal.style.display = 'none';
+      feedback.innerHTML = '';
+    }
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+        feedback.innerHTML = '';
+      }
+    }
+
+    // Manejar envío del formulario: armar mailto y abrir cliente de correo
+    supportForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const mensaje = document.getElementById('mensaje').value.trim();
+
+      if (!nombre || !email) {
+        feedback.innerHTML = '❌ Por favor completa el nombre y correo electrónico.';
+        return;
+      }
+      if (!email.includes('@')) {
+        feedback.innerHTML = '❌ Introduce un correo electrónico válido.';
+        return;
+      }
+
+      // Construir asunto y cuerpo del correo
+      const asunto = `Apoyo a la propuesta MGTC - ${nombre}`;
+      let cuerpo = `Nombre: ${nombre}%0A`;
+      cuerpo += `Correo: ${email}%0A%0A`;
+      cuerpo += `Mensaje de apoyo:%0A${mensaje || '(Sin mensaje adicional)'}%0A%0A`;
+      cuerpo += `--- Este correo se genera automáticamente desde la landing page MGTC. ---`;
+
+      const mailtoLink = `mailto:mgtcpropuesta@gmail.com?subject=${encodeURIComponent(asunto)}&body=${cuerpo}`;
+      
+      // Abrir el cliente de correo
+      window.location.href = mailtoLink;
+      
+      // Mostrar feedback y cerrar modal después de un breve momento
+      feedback.innerHTML = '✅ ¡Gracias! Se abrirá tu correo para confirmar el envío.';
+      setTimeout(() => {
+        modal.style.display = 'none';
+        supportForm.reset();
+        feedback.innerHTML = '';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
